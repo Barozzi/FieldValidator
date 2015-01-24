@@ -1,17 +1,7 @@
-var validate = FieldValidator();
-var hasErrors = 0;
-
-if (targetEntity.getQualifiedAttribute("customAttributes.transgenicAnimals.customAttributes.creatingATransgenicRodent") === true) {
-    hasErrors += validate.field("customAttributes.transgenicAnimals.customAttributes.tAProtocol").isNotNull();
-}
-hasErrors += validate.field("customAttributes.descriptionOfProcedures").isNotNull();
-
-if(hasErrors) throw new Error(-1,"There are " + hasErrors + " missing field(s). Please see below.");
-
 /*
  * Field Vaidator
  * Written by: Greg Barozzi
- * Field Validator returns a module-like object that simplifies 
+ * Field Validator returns a module-like object that simplifies
  * custom validation in Click Portal views. Due to the 'Free code'
  * restriction this source must be included in the validation script
  * hook for each view that requires custom validation.
