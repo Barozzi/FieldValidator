@@ -16,10 +16,10 @@ be used in.
     var validate = FieldValidator();
     var hasErrors = 0;
 
-    if (targetEntity.getQualifiedAttribute("customAttributes.transgenicAnimals.customAttributes.creatingATransgenicRodent") === true) {
-        hasErrors += validate.field("customAttributes.transgenicAnimals.customAttributes.tAProtocol").isNotNull();
+    if (targetEntity.getQualifiedAttribute("_ClickAgreement.customAttributes.transgenicAnimals.customAttributes.creatingATransgenicRodent") === true) {
+        hasErrors += validate.field("_ClickAgreement.customAttributes.transgenicAnimals.customAttributes.tAProtocol").isNotNull();
     }
-    hasErrors += validate.field("customAttributes.descriptionOfProcedures").isNotNull();
+    hasErrors += validate.field("_ClickAgreement.customAttributes.descriptionOfProcedures").isNotNull();
 
     if(hasErrors) throw new Error(-1,"There are " + hasErrors + " missing field(s). Please see below.");
 

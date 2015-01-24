@@ -17,22 +17,22 @@ function FieldValidator() {
         },
         isNull: function() {
             if (this.entity == null) return 0;
-            targetEntity.reportFieldError("_ClickAgreement." + this.property, "Please provide additional information.");
+            targetEntity.reportFieldError(this.property, "Please provide additional information.");
             return 1;
         },
         isNotNull: function() {
             if (this.entity != null) return 0;
-            targetEntity.reportFieldError("_ClickAgreement." + this.property, "Please provide additional information.");
+            targetEntity.reportFieldError(this.property, "Please provide additional information.");
             return 1;
         },
         matchesEntity: function(entity) {
             if (this.entity === entity) return 0;
-            targetEntity.reportFieldError("_ClickAgreement." + this.property, "Please provide additional information.");
+            targetEntity.reportFieldError(this.property, "Please provide additional information.");
             return 1;
         },
         setCountNotZero: function() {
             if (this.entity && this.entity.count() > 0) return 0;
-            targetEntity.reportFieldError("_ClickAgreement." + this.property, "Please provide additional information.");
+            targetEntity.reportFieldError(this.property, "Please provide additional information.");
             return 1;
         }
     };
