@@ -10,11 +10,10 @@ Example
 -------
 *Note: Because of the 'Free Code' restriction that exists in Portal version
 6 and below, it is required to include the full source of
-fieldValidator.js at the bottom of each validation script that it is to
-be used in.*
+fieldValidator.js at the bottom of each validation script.*
 
-**The following code should be pasted into the view validation script
-hook, found in the web interface under the View tab for your project.**
+The following code would be pasted into the view validation script
+hook, which you can find find via the web interface under the 'View' tab of your project.
 
     var validate = FieldValidator();
     var hasErrors = 0;
