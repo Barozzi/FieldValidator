@@ -8,10 +8,11 @@ Click Portal views.
 
 Example
 -------
-*Because of the 'Free Code' restriction that exists in Portal version
+*Note: Because of the 'Free Code' restriction that exists in Portal version
 6 and below, it is required to include the full source of
 fieldValidator.js at the bottom of each validation script that it is to
 be used in.*
+
 **The following code should be pasted into the view validation script
 hook, found in the web interface under the View tab for your project.**
 
