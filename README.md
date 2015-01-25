@@ -19,7 +19,7 @@ hook, which you can find find via the web interface under the 'View' tab of your
     var hasErrors = 0;
 
     if (targetEntity.getQualifiedAttribute("_ClickAgreement.customAttributes.transgenicAnimals") === true) {
-        hasErrors += validate.field("_ClickAgreement.customAttributes.transgenicAnimals").isNotNull();
+        hasErrors += validate.field("_ClickAgreement.customAttributes.transgenicAnimalsDescription").isNotNull();
     }
     hasErrors += validate.field("_ClickAgreement.customAttributes.descriptionOfProcedures").isNotNull();
 
