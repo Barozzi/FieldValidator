@@ -34,9 +34,12 @@ function FieldValidator() {
             if (this.entity && this.entity.count() > 0) return 0;
             targetEntity.reportFieldError(this.property, "Please provide additional information.");
             return 1;
+        },
+        isGreaterThan: function(num) {
+            if (this.entity > num) return 0;
+            targetEntity.reportFieldError(this.property, "The provided value must be greater than " + num + ".");
+            return 1;
         }
     };
     return validator;
 }
-
-
