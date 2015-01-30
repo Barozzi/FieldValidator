@@ -12,7 +12,7 @@ function FieldValidator() {
         entity: null,
         field: function(property) {
             this.property = property;
-            this.entity = targetEntity.getQualifiedAttribute(property);
+            this.entity = targetEntity.getQualifiedAttribute(property.replace(/^(\w+)\./, ''));
             return this;
         },
         isNull: function() {
