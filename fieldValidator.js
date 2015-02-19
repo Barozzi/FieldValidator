@@ -39,7 +39,12 @@ function FieldValidator() {
             if (this.entity > num) return 0;
             targetEntity.reportFieldError(this.property, "The provided value must be greater than " + num + ".");
             return 1;
-        }
+        },
+		isNumber: function() {
+			if (!isNaN(parseInt(this.entity))) return 0;
+            targetEntity.reportFieldError(this.property, "The provided value must not contain letters or special characters.");
+            return 1;
+		}
     };
     return validator;
 }
