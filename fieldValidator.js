@@ -45,6 +45,16 @@ function FieldValidator() {
             targetEntity.reportFieldError(this.property, "The provided value must not contain letters or special characters.");
             return 1;
         }
+        isValidEmailFormat() {
+            if (validateEmail(this.entity)) return 0;
+            targetEntity.reportFieldError(this.property, "The provided value must be validly formatted email address.");
+            return 1;
+            
+            function validateEmail(email) { 
+                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            } 
+        }
     };
     return validator;
 }
