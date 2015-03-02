@@ -44,8 +44,8 @@ function FieldValidator() {
             if (!isNaN(parseInt(this.entity))) return 0;
             targetEntity.reportFieldError(this.property, "The provided value must not contain letters or special characters.");
             return 1;
-        }
-        isValidEmailFormat() {
+        },
+        isValidEmailFormat: function() {
             if (validateEmail(this.entity)) return 0;
             targetEntity.reportFieldError(this.property, "The provided value must be validly formatted email address.");
             return 1;
