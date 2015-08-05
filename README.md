@@ -1,54 +1,61 @@
 FieldValidator
 ==============
 
-FieldValidator is a JScript module to simplify custom validation in
+FieldValidator is a JScript method to simplify custom validation in
 Click Portal views.
 
 ![FieldValidator](./validator.jpg)
 
+
+Getting Started
+---------------
+
+1. To begin using FieldValidator on your Click store, you will need to open
+Entity Manager and navigate to the CustomUtils entity.
+2. Inside CustomUtils, create a new perType method named validateField and paste
+in the source code.
+3. Call validateField from a view validation script hook.
+
 Example
 -------
-*Note: Because of the 'Free Code' restriction that exists in Portal version
-6 and below, it is required to include the full source of
-fieldValidator.js at the bottom of each validation script.*
 
-The following code would be pasted into the view validation script
-hook, which you can find find via the web interface under the 'View' tab of your project.
+The following is an example of a custom validation implementation using
+validateField. The view property _IRBSubmission.customAttributes.happinessDescription_ will be a required field if the boolean property
+_customAttributes.isHappy_ is selected true. The validateField method
+handles marking the required information via _reportFieldError_ and
+throws a validation error when appropriate once all required fields are
+marked.
 
-    var validate = FieldValidator();
-    var hasErrors = 0;
+    CustomUtils.validateField(function(validate) {
+        var  IS_HAPPY = targetEntity.getQualifiedAttribute("customAttributes.isHappy");
+        if (IS_HAPPY === true) {
+            validate.field("_IRBSubmission.customAttributes.happinessDescription").isNotNull();
+        }
 
-    if (targetEntity.getQualifiedAttribute("_ClickAgreement.customAttributes.transgenicAnimals") === true) {
-        hasErrors += validate.field("_ClickAgreement.customAttributes.transgenicAnimalsDescription").isNotNull();
-    }
-    hasErrors += validate.field("_ClickAgreement.customAttributes.descriptionOfProcedures").isNotNull();
+        validate.field("_IRBSubmission.customAttributes.contactEmail").hasValidEmail();
+    });
 
-    if (hasErrors) {
-        throw new Error(-1,"There are " + hasErrors + " missing field(s). Please see below.");
-    }
-
-    /* paste fieldValidator.js here */
 
 Example Breakdown
 -----------------
 
-These first two lines create an instance of the FieldValidator module and initialize an error counter.
+The first line  invokes
+the validateField method and passes in an anonymous function as an
+argument. Inside of our anonymous function we will reference
+validatefield's validation object via the _validate_ label.
 
-    var validate = FieldValidator();
-    var hasErrors = 0;
+    CustomUtils.validateField(function(validate) {
 
-These lines of code perform conditional validation when the transgenicAnimals question is answered 'Yes', then the transgenicAnimalsDescription question must not be left blank.
+These lines of code perform conditional validation. When the _isHappy_ question is answered 'Yes', then the _happinessDescription_ must be filled in.
 
-    if (targetEntity.getQualifiedAttribute("_ClickAgreement.customAttributes.transgenicAnimals") === true) {
-        hasErrors += validate.field("_ClickAgreement.customAttributes.transgenicAnimalsDescription").isNotNull();
+    var  IS_HAPPY = targetEntity.getQualifiedAttribute("customAttributes.isHappy");
+    if (IS_HAPPY === true) {
+        validate.field("_IRBSubmission.customAttributes.happinessDescription").isNotNull();
     }
 
-This next line performs unconditinal validation. Another way to accompolish this would be to select the required field checkbox in the View Editor. However, staying with a single approach to view validation gives the user a more consistent look and feel.
+This next line performs validation each time the view is changed.
 
-    hasErrors += validate.field("_ClickAgreement.customAttributes.descriptionOfProcedures").isNotNull();
+    validate.field("_IRBSubmission.customAttributes.contactEmail").hasValidEmail();
 
-These last lines check the count of invalid fields that have been detected and will throw an error if that number is greater than 0, resulting in the offending fields being marked. The data on the page will not be persisted until the errors have ben corrected.
-
-    if (hasErrors) {
-        throw new Error(-1,"There are " + hasErrors + " missing field(s). Please see below.");
-    }
+That's all there is to it. The method tracks any failed validations,
+reports missing fields to the user, and throws the validation error.
