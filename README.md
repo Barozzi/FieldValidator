@@ -32,7 +32,7 @@ marked.
             validate.field("_IRBSubmission.customAttributes.happinessDescription").isNotNull();
         }
 
-        validate.field("_IRBSubmission.customAttributes.contactEmail").hasValidEmail();
+        validate.field("_IRBSubmission.customAttributes.contactEmail").isValidEmailFormat();
     });
 
 
@@ -53,9 +53,11 @@ These lines of code perform conditional validation. When the _isHappy_ question 
         validate.field("_IRBSubmission.customAttributes.happinessDescription").isNotNull();
     }
 
-This next line performs validation each time the view is changed.
+This next line performs validation each time the view is changed. It is
+important to note that the fieldValidator expects to be passed the fully
+qualified path to a property, as seen below.
 
-    validate.field("_IRBSubmission.customAttributes.contactEmail").hasValidEmail();
+    validate.field("_IRBSubmission.customAttributes.contactEmail").isValidEmailFormat();
 
 That's all there is to it. The method tracks any failed validations,
 reports missing fields to the user, and throws the validation error.
