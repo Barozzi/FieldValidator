@@ -3,14 +3,15 @@
  * @name FieldVaidator
  * @author Greg Barozzi
  * @desc
- * # Field Validator returns a module-like object that simplifies
- * # custom validation in Click Portal views. Due to the 'Free code'
- * # restriction this source must be included in the validation script
- * # hook for each view that requires custom validation.
+ * # FieldValidator is a JScript method to simplify custom validation in Click Portal views
  * @example
  * #
  * # CustomUtils.fieldValidator(function(validate) {
- * #    validate.field("_IRBSubmission.customUtils.myBool").isNotNull();
+ * #
+ * #    // validate that the view reference to myBool is not null.
+ * #    validate.field("_IRBSubmission.customAttributes.myBool").isNotNull();
+ * #
+ * #    // If myBool is answered true, validate that myString is not null.
  * #    if (targetEntity.getQualifiedAttribute("customAttributes.myBool") === true) {
  * #        validate.field.("_IRBSubmission.customAttributes.myString").isNotNull();
  * #    }
@@ -26,6 +27,7 @@ function fieldValidator(fn) {
 
     validate.reportErrors();
     //end
+
 
     // Validator
     function Validator() {
@@ -87,13 +89,14 @@ function fieldValidator(fn) {
         return validator;
     }
 
-    /** Returns the project. */
+    // return the project type
     function getProject(sch) {
         var isProject = (sch.getQueryString("Project") != null) ? true : false;
         if (isProject == true) {
-            return sch.currentEntity;
+            return sch.currentEntity(); // context is project
         } else {
-            return sch.currentEntity.loggedFor;
+            // Activity view
+            return sch.currentEntity().loggedFor; // context is activity
         }
     }
 }
