@@ -1,6 +1,6 @@
 /**
  * GB
- * @name FieldVaidator
+ * @name FieldValidator
  * @author Greg Barozzi
  * @desc
  * # FieldValidator is a JScript method to simplify custom validation in Click Portal views
@@ -47,6 +47,12 @@ function fieldValidator(fn) {
             },
             isNotNull: function() {
                 if (this.entity != null) return 0;
+                targetEntity.reportFieldError(this.property, "Please provide additional information.");
+                this.errorCount +=1;
+            },
+            isNotNullStr: function() {
+                var noWhiteSpace = this.entity.replace(/\s/g,"");
+                if (this.entity != null && noWhiteSpace.length > 0) return 0;
                 targetEntity.reportFieldError(this.property, "Please provide additional information.");
                 this.errorCount +=1;
             },
